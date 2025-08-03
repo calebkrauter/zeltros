@@ -1,103 +1,66 @@
+'use client'
 import Image from "next/image";
-
+import {Howl, Howler} from 'howler';
+import { useEffect, useRef } from "react";
+import { Button } from "@heroui/button";
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const sound = useRef<Howl | null>(null);
+const playSound = () => {
+    if (!sound.current) {
+      sound.current = new Howl({
+        src: ['/the-bell.mp3'],
+        loop: true,
+        volume: 0.5,
+      });
+      sound.current.play();
+    } else if (!sound.current.playing()) {
+      sound.current.play();
+    }
+  };
+  const stopSound = () => {
+    if ( sound.current?.playing()) {
+      sound.current.stop();
+    }
+  }
+
+return (
+     <div>
+       <nav className="fixed flex justify-center items-center h-20 w-full bg-gray-900/30 backdrop-blur-xl border-b-1 border-gray-500 rounded-b-xl">
+        <div className="font-semibold text-3xl">
+                 CALEB KRAUTER
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        
+       </nav>
+        <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+          <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+            <Button className="bg-red-600 w-full h-full" onPress={playSound}>
+              Play
+            </Button>
+                        <Button className="bg-red-600 w-full h-full" onPress={stopSound}>
+              STOP
+            </Button>
+            <div className="w-10">
+              Here’s a block of dummy text using various sentence structures and tones. Let me know if you want a specific topic, tone, or format.
+
+The sky shimmered with a dull amber hue as the city awoke, stretching its limbs in the glow of early light. Beneath steel arches and silent windows, the hum of machines merged with the distant chatter of life beginning again. Ideas flickered like static in the minds of those passing by—brief, weightless, and often forgotten.
+
+Meanwhile, somewhere behind thick glass, a screen flickered to life. Words lined up in code and color, pushing the day forward pixel by pixel. Deadlines loomed like shadows, soft and certain. Coffee cooled slowly beside a notepad full of scribbled half-thoughts.
+
+In another room, music played softly through worn-out speakers—notes reverberating against the walls like memory. Frosted glass caught the sunlight, breaking it into soft rainbows across an empty floor.
+
+No one noticed the moment when the ordinary turned meaningful. It rarely announces itself. It sneaks in like breath—silent, essential, and easy to miss.
+
+Let me know if you want this styled as prose, marketing copy, lorem ipsum, poetry, or something else.
+
+
+ChatGPT can make mistakes. Check important info.
+
+            </div>
+          </main>
+          <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+        </footer>
+      </div>
+     </div>
   );
 }
