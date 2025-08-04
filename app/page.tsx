@@ -4,9 +4,11 @@ import {Howl, Howler} from 'howler';
 import { useEffect, useRef, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Button from "./components/Button";
+import { i } from "framer-motion/client";
 export default function Home() {
 
   const sound = useRef<Howl | null>(null);
+  const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 const startMusic = () => {
     if (!sound.current) {
@@ -19,6 +21,7 @@ const startMusic = () => {
     } else if (!sound.current.playing()) {
       sound.current.play();
     }
+    setPlaying(sound.current?.playing())
   };
   const terminate = () => {
     if ( sound.current?.playing()) {
@@ -55,13 +58,15 @@ const startMusic = () => {
 
 useEffect(() => {
   const interval = setInterval(() => {
-    if (sound.current?.playing()) {
-      const position = sound.current.seek() as number;
-      setProgress(position);
+    if (sound.current) {
+      setProgress(sound.current.seek());
+      setPlaying(sound.current?.playing());
     }
-  }, 300)
+  }, 100)
   return () => clearInterval(interval);
-}, []);
+}, [sound.current]);
+
+
   const [seeking, setSeeking] = useState(false);
   const handleSeek = (_e: Event, value: number | number[]) => {
     if (typeof value === 'number' && sound.current) {
@@ -85,12 +90,11 @@ return (
           <div className="flex flex-col w-[500px] h-[500px] bg-amber-50 justify-center items-center">
             <div className="flex items-center justify-center w-[475px] h-[100px] bg-gray-200 rounded-lg">
               <div>
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-center gap-5">
                 
-                <Button text="PLAY" onPress={play}/>
+
+                <Button onPress={toggleMusic} playing={playing}/>
                 <Button text="STOP" onPress={terminate}/>
-                <Button text="PAUSE" onPress={pause}/>
-                <Button text="|| I>" onPress={toggleMusic}/>
               </div>
 
               <div className="my-3"></div>
