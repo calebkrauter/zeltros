@@ -1,11 +1,8 @@
-import Slider, { SliderProps } from "@mui/material/Slider";
-import MarginHorizontal from "../helpers/MarginHorizontal";
+import { SliderProps } from "@mui/material/Slider";
 import MarginRight from "../helpers/MarginRight";
-import MarginVertical from "../helpers/MarginVertical";
 import SongTime from "./SongTime";
-import MarginBottom from "../helpers/MarginBottom";
-import MarginTop from "../helpers/MarginTop";
 import SliderWrapper from "../wrappers/SliderWrapper";
+import MySlider from "./MySlider";
 
 interface SeekerProps extends SliderProps {
     time: number;
@@ -14,9 +11,7 @@ interface SeekerProps extends SliderProps {
 export default function Seeker ({time, ...props}: SeekerProps) {
     return (
         <SliderWrapper>
-            <MarginHorizontal>
-                <Slider {...props}/>
-            </MarginHorizontal>
+            <MySlider {...props}/>
             <SongTime time={time}/>
             <MarginRight/>
         </SliderWrapper>

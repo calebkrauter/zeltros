@@ -1,16 +1,14 @@
-import Slider, { SliderProps } from "@mui/material/Slider";
-import MarginHorizontal from "../helpers/MarginHorizontal";
-import MarginRight from "../helpers/MarginRight";
+
+import { SliderProps } from "@mui/material/Slider";
 import SliderWrapper from "../wrappers/SliderWrapper";
+import MySlider from "./MySlider";
 
 
 
 export default function Volume({...props}: SliderProps) {
     return (
         <SliderWrapper>
-            <MarginHorizontal>
-                <Slider {...props}/>
-            </MarginHorizontal>
+            <MySlider {...props}/>
         </SliderWrapper>
                    
     )
