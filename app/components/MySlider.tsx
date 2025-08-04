@@ -1,9 +1,10 @@
 import { Slider, SliderProps } from "@mui/material";
 import MarginHorizontal from "../helpers/MarginHorizontal";
+import Image from "next/image";
 
-export default function MySlider({...props}: SliderProps) {
+export default function MySlider({ ...props}: SliderProps) {
     return (
-        <MarginHorizontal>
+        <MarginHorizontal> 
             <Slider {...props} sx={{
                 color: '#5DA6B3', // bar and thumb color
                 height: 5,

@@ -10,6 +10,12 @@ import Title from './components/Title';
 import SongPlayerWrapper from './wrappers/SongPlayerWrapper';
 import MarginVertical from './helpers/MarginVertical';
 import Volume from './components/Volume';
+import Image from 'next/image';
+import MarginHorizontal from './helpers/MarginHorizontal';
+import MarginLeft from './helpers/MarginLeft';
+import MarginBottom from './helpers/MarginBottom';
+import VolumeButton from './components/VolumeButton';
+
 export default function Home() {
 
   const sound = useRef<Howl | null>(null);
@@ -17,6 +23,7 @@ export default function Home() {
   const [progress, setProgress] = useState(0);
   const [looping, setLooping] = useState(false)
 const [justStarted, setJustStarted] = useState(false);
+const [volume, setVolume] = useState(1);
 const startMusic = async () => {
     if (!sound.current) {
       sound.current = new Howl({
@@ -118,6 +125,11 @@ useEffect(() => {
       toggleMusic()
     }
   }
+
+  const handleVolumeChange = (value: number) => {
+    sound.current?.volume(value)
+    setVolume(value);
+  }
 return (
      <div className='flex justify-center'>
        <nav className="fixed flex justify-center items-center h-20 w-full bg-gray-900/30 backdrop-blur-xl border-b-1 border-gray-500 rounded-b-xl">
@@ -140,12 +152,35 @@ return (
               </MediaButtonWrapper>
               <MarginVertical m={"my-2.5"}/>
               <Seeker time={progress} defaultValue={0} max={sound.current?.duration() as number} step={0.01} value={progress} onChange={handleSeek} onChangeCommitted={handleOnChangeCommitted}/>
-              <Volume defaultValue={100} onChange={(e) => {
+
+              <div className='flex flex-row w-full items-center'>
+              <Volume defaultValue={100} value={volume * 100} onChange={(e) => {
                 const value = parseFloat((e.target as HTMLInputElement).value);
                 if (!isNaN(value)) {
-                  sound.current?.volume(value/100);
+                  handleVolumeChange(value/100);
+                  setVolume(value/100);
                 }
               }}/>
+                <div className='mb-5 mr-5'>
+
+                  <VolumeButton onPress={() => {
+                    if (volume === 0) {
+                      handleVolumeChange(1);
+                    } else {
+                      handleVolumeChange(0);
+                    }
+                    }}>
+                    {volume > 0 && (
+                      <Image className={`bg-black w-full h-full rounded-lg`} src={"/volume-up.svg"} alt={"Volume up icon"} width={16} height={16}/>
+
+                    )}
+                    {volume === 0 && (
+                      <Image className={`bg-black w-full h-full rounded-lg`} src={"/volume-mute.svg"} alt={"Volume mute icon"} width={16} height={16}/>
+
+                    )}
+                  </VolumeButton>
+                </div>
+              </div>
             </MediaWrapper>
 
           </SongPlayerWrapper>
