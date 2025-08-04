@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type MarginY = "my-5" | "my-2.5";
+type MarginY =  "my-10"| "my-5" | "my-2.5";
 
 interface MarginVerticalProps {
     children?: ReactNode;

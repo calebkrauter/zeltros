@@ -16,17 +16,19 @@ export default function Home() {
   const [progress, setProgress] = useState(0);
   const [looping, setLooping] = useState(false)
 const [justStarted, setJustStarted] = useState(false);
-const startMusic = () => {
+const startMusic = async () => {
     if (!sound.current) {
       sound.current = new Howl({
         src: ['/the-bell.mp3'],
         loop: looping,
+        html5: true,
         volume: 0.5,
       });
+  if (Howler.ctx && Howler.ctx.state === 'suspended') {
+    await Howler.ctx.resume();
+  }
 
-      sound.current.once('unlock', () => {
-        if (sound.current) sound.current.play();
-      });
+    sound.current.play();
 
     } else if (!sound.current.playing()) {
       sound.current.play();
@@ -125,7 +127,7 @@ return (
                   CALEB KRAUTER
           </div>
        </nav>
-        <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+        <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen pb-20 gap-16 p-8">
           <main className="flex items-center justify-center w-full flex-col gap-[32px] row-start-2">
           <SongPlayerWrapper>
             
