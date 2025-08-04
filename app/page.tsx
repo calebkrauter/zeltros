@@ -24,9 +24,7 @@ const startMusic = async () => {
         html5: true,
         volume: 0.5,
       });
-  if (Howler.ctx && Howler.ctx.state === 'suspended') {
-    await Howler.ctx.resume();
-  }
+
 
     sound.current.play();
 
