@@ -11,7 +11,7 @@ export default function MediaWrapper({children}: MediaWrapperProps ) {
         <MarginVertical>
             <MarginHorizontal m="mx-10">
 
-                <div className="flex flex-col items-center justify-center w-full h-[100px] bg-gray-200 rounded-lg">
+                <div className="flex flex-col items-center justify-center w-full h-full bg-gray-200 rounded-lg">
                     {children}
                 </div>
             </MarginHorizontal>

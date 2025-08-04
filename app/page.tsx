@@ -9,6 +9,7 @@ import MediaButtonWrapper from './wrappers/MediaButtonsWrapper';
 import Title from './components/Title';
 import SongPlayerWrapper from './wrappers/SongPlayerWrapper';
 import MarginVertical from './helpers/MarginVertical';
+import Volume from './components/Volume';
 export default function Home() {
 
   const sound = useRef<Howl | null>(null);
@@ -24,7 +25,6 @@ const startMusic = async () => {
         html5: true,
         volume: 0.5,
       });
-
 
     sound.current.play();
 
@@ -139,8 +139,15 @@ return (
                   <Button text="Loop" onPress={handleLooping} toggle={looping}/>
               </MediaButtonWrapper>
               <MarginVertical m={"my-2.5"}/>
-              <Seeker defaultValue={0} max={sound.current?.duration() as number} step={0.01} value={progress} onChange={handleSeek} onChangeCommitted={handleOnChangeCommitted}/>
+              <Seeker time={progress} defaultValue={0} max={sound.current?.duration() as number} step={0.01} value={progress} onChange={handleSeek} onChangeCommitted={handleOnChangeCommitted}/>
+              <Volume defaultValue={100} onChange={(e) => {
+                const value = parseFloat((e.target as HTMLInputElement).value);
+                if (!isNaN(value)) {
+                  sound.current?.volume(value/100);
+                }
+              }}/>
             </MediaWrapper>
+
           </SongPlayerWrapper>
 
           </main>

@@ -5,12 +5,14 @@ import MarginHorizontal from "../helpers/MarginHorizontal";
 
 export default function CoverArt({...props}: ImageProps) {
     return (
-        <MarginVertical>
-            <MarginHorizontal m="mx-10">
-                <div className={`bg-red-300 rounded-lg items-center w-full h-full`}>
-                    <Image className={`w-full h-full`} {...props}/>
-                </div>
-            </MarginHorizontal>
-        </MarginVertical>
+        <div className="w-full">
+            <MarginVertical>
+                <MarginHorizontal m="mx-10">
+                    <div className={`bg-red-300 rounded-lg items-center w-full h-full`}>
+                        <Image className={`w-full h-full`} {...props}/>
+                    </div>
+                </MarginHorizontal>
+            </MarginVertical>
+        </div>
     )
 }

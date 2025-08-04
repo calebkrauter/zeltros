@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-type MarginX = "mx-10" | "mx-5"
+type MarginX = "mx-10" | "mx-5" | "mx-2.5"
 interface MarginHorizontalProps {
     children: ReactNode;
     m?: MarginX;

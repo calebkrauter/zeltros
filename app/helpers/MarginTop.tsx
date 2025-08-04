@@ -1,4 +1,4 @@
-type MarginT = "mt-5"
+type MarginT = "mt-5" | "mt-2.5"
 
 interface MarginTopProps {
     m?: MarginT;
