@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@heroui/button": "^2.2.24",
     "@heroui/system": "^2.4.20",
     "@heroui/theme": "^2.4.20",
+    "@mui/material": "^7.2.0",
     "framer-motion": "^12.23.12",
     "howler": "^2.2.4",
     "next": "15.4.5",
