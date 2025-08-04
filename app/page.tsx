@@ -2,8 +2,8 @@
 import Image from "next/image";
 import {Howl, Howler} from 'howler';
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@heroui/button";
 import Slider from "@mui/material/Slider";
+import Button from "./components/Button";
 export default function Home() {
 
   const sound = useRef<Howl | null>(null);
@@ -82,23 +82,28 @@ return (
         <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
           <main className="flex items-center w-full flex-col gap-[32px] row-start-2">
             
-          <div className="flex flex-col w-[500px] h-[500px]bg-amber-50  items-center">
-            <div className="flex flex-row w-[450px]">
+          <div className="flex flex-col w-[500px] h-[500px] bg-amber-50 justify-center items-center">
+            <div className="flex items-center justify-center w-[475px] h-[100px] bg-gray-200 rounded-lg">
+              <div>
+                <div className="flex flex-row justify-between">
+                
+                <Button text="PLAY" onPress={play}/>
+                <Button text="STOP" onPress={terminate}/>
+                <Button text="PAUSE" onPress={pause}/>
+                <Button text="|| I>" onPress={toggleMusic}/>
+              </div>
 
-              <Button className="bg-red-600 w-full h-full" onPress={play}>
-                PLAY
-              </Button>
-              <Button className="bg-red-600 w-full h-full" onPress={terminate}>
-                STOP
-              </Button>
-              <Button className="bg-red-600 w-full h-full" onPress={pause}>
-                PAUSE
-              </Button>
-              <Button className="bg-red-600 w-full h-full" onPress={toggleMusic}>
-                Play / Pause
-              </Button>
+              <div className="my-3"></div>
+
+              <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center w-[425px] bg-gray-100 rounded-lg">
+                  <div className="w-[375px]">
+                    <Slider defaultValue={0} max={sound.current?.duration() as number} step={0.01} value={progress} onChange={handleSeek} onChangeCommitted={toggleMusic}/>
+                  </div>
+                </div>
+              </div>
+              </div>
             </div>
-            <Slider defaultValue={0} max={sound.current?.duration() as number} step={0.01} value={progress} onChange={handleSeek} onChangeCommitted={toggleMusic}/>
           </div>
           </main>
           <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
