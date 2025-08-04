@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import MarginVertical from "../helpers/MarginVertical";
 import MarginHorizontal from "../helpers/MarginHorizontal";
 
 interface MediaButtonWrapperProps {

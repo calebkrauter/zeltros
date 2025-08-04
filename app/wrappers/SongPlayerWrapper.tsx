@@ -1,7 +1,4 @@
 import { ReactNode } from "react";
-import MarginTop from "../helpers/MarginTop";
-import MarginBottom from "../helpers/MarginBottom";
-import MarginHorizontal from "../helpers/MarginHorizontal";
 import MarginVertical from "../helpers/MarginVertical";
 
 interface SongPlayerWrapperProps {

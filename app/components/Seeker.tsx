@@ -1,11 +1,7 @@
 import Slider, { SliderProps } from "@mui/material/Slider";
 import MarginHorizontal from "../helpers/MarginHorizontal";
 
-interface SeekerProps extends SliderProps {
-    
-}
-
-export default function Seeker ({...props}: SeekerProps) {
+export default function Seeker ({...props}: SliderProps) {
     return (
         <div className="flex w-full">
             <MarginHorizontal>

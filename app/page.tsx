@@ -1,16 +1,13 @@
 'use client'
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 import { useEffect, useRef, useState } from "react";
 import Button from "./components/Button";
-import { i } from "framer-motion/client";
 import Seeker from "./components/Seeker";
 import CoverArt from './components/CoverArt';
 import MediaWrapper from './wrappers/MediaWrapper';
 import MediaButtonWrapper from './wrappers/MediaButtonsWrapper';
-import MarginTop from './helpers/MarginTop';
 import Title from './components/Title';
 import SongPlayerWrapper from './wrappers/SongPlayerWrapper';
-import MarginHorizontal from './helpers/MarginHorizontal';
 import MarginVertical from './helpers/MarginVertical';
 export default function Home() {
 
@@ -26,7 +23,11 @@ const startMusic = () => {
         loop: looping,
         volume: 0.5,
       });
-      sound.current.play();
+
+      sound.current.once('unlock', () => {
+        if (sound.current) sound.current.play();
+      });
+
     } else if (!sound.current.playing()) {
       sound.current.play();
     }
@@ -76,11 +77,6 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, [sound.current]);
 
-// Debugging:
-useEffect(() => {
-  console.log(looping)
-},[looping])
-
   const [seeking, setSeeking] = useState(false);
   const handleSeek = (_e: Event, value: number | number[]) => {
     pause();
@@ -123,7 +119,7 @@ useEffect(() => {
     }
   }
 return (
-     <div>
+     <div className='flex justify-center'>
        <nav className="fixed flex justify-center items-center h-20 w-full bg-gray-900/30 backdrop-blur-xl border-b-1 border-gray-500 rounded-b-xl">
           <div className="font-semibold text-3xl">
                   CALEB KRAUTER
